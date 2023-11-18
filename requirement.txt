@@ -2,3 +2,5 @@ Flask
 psycopg2-binary
 SQLAlchemy
 flask-restful
+flask_sqlalchemy
+python-dotenv
