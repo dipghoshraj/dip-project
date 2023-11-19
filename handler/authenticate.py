@@ -28,7 +28,7 @@ SCHEMA = {
     "required": ["form", "to"]
 }
 
-RATE_LIMIT = 40
+RATE_LIMIT = 50
 RATE_LIMIT_WINDOW = 24*3600  
 
 
@@ -57,7 +57,7 @@ def validdec(func):
             print(e.path[0])
             return jsonify({'message': '', 'error': f'{e.path[0]} is invalid'}), 400
         except Exception as e:
-            raise
+            # raise
             return jsonify({'message': '', 'error': 'unknown error'}), 500
     wrapper.__name__ = func.__name__
     return wrapper
@@ -83,7 +83,7 @@ def api_call_limit(func):
             if recent_requests < RATE_LIMIT:
                 redis_object.zadd(key, {current_time: current_time})
                 return func(*args, **kwargs)
-            return {"message": "", "error": f"limit reached for from {form}"}
+            return jsonify({"message": "", "error": f"limit reached for from {form}"}), 400
 
         except Exception as e:
             return jsonify({'message': '', 'error': 'unknown error'}), 500
