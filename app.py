@@ -18,6 +18,11 @@ db.init_app(app)
 api = Api(app)
 
 
+@app.route('/', methods=['GET'])
+def index():
+    return jsonify({"message": "hello world"}), 200
+
+
 @app.route('/inbound/sms/', methods=['POST'])
 @validdec
 def inbound(data):
