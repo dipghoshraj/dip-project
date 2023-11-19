@@ -9,7 +9,7 @@ def inbound_ops(data):
 
     phone_number = Phone_number.query.filter_by(number= to, account_id= user_id).first()
     if not phone_number:
-        return {"message": "", "error": "to parameter not found"}, 404
+        return {"message": "", "error": "to parameter not found"}, 400
     
     if 'stop' in text.lower():
         redis_object.set(f"calls:{str(form)}_{str(to)}", str(to), ex=3600*4)

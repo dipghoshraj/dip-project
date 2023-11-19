@@ -16,6 +16,6 @@ def outbound_ops(data):
     
     phone_number = Phone_number.query.filter_by(number= form, account_id= user_id).first()
     if not phone_number:
-        return {"message": "", "error": "from parameter not found"}, 404
+        return {"message": "", "error": "from parameter not found"}, 400
     return {"message": "outbound sms ok","error": ""}, 200
 

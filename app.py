@@ -18,7 +18,7 @@ db.init_app(app)
 api = Api(app)
 
 
-@app.route('/inbound/sms', methods=['POST'])
+@app.route('/inbound/sms/', methods=['POST'])
 @validdec
 def inbound(data):
     try:
@@ -30,7 +30,7 @@ def inbound(data):
 
 
 
-@app.route('/outbound/sms', methods=['POST'])
+@app.route('/outbound/sms/', methods=['POST'])
 @api_call_limit
 @validdec
 def outbound(data):
