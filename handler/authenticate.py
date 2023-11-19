@@ -57,6 +57,7 @@ def validdec(func):
             print(e.path[0])
             return jsonify({'message': '', 'error': f'{e.path[0]} is invalid'}), 400
         except Exception as e:
+            print(e)
             return jsonify({'message': '', 'error': 'unknown error'}), 500
     wrapper.__name__ = func.__name__
     return wrapper
@@ -85,5 +86,6 @@ def api_call_limit(func):
             return {"message": "", "error": f"limit reached for from {form}"}
 
         except Exception as e:
+            print(e)
             return jsonify({'message': '', 'error': 'unknown error'}), 500
     return check_limit
