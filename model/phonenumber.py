@@ -1,6 +1,6 @@
 
 
-from app import db
+from model import db
 
 class Phone_number(db.Model):
     id = db.Column(db.Integer, nullable=False, unique=True,)

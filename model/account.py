@@ -1,5 +1,4 @@
-from app import db
-
+from model import db
 
 class Account(db.Model):
     id =db.Column(db.Integer, primary_key=True)
