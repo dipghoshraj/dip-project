@@ -1,0 +1,24 @@
+# to build layer
+# 1. remove rackages
+# 2. run -> pip3 install --target ../package/python -r requirements.txt
+# aws cloudformation package --template-file layer.yml --s3-bucket proj-calls --output-template-file out.yml
+# aws cloudformation deploy --template-file out.yml --stack-name proj-call-dev --capabilities CAPABILITY_NAMED_IAM --region ap-south-1
+
+
+
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: An AWS Lambda application that calls the Lambda API.
+Resources:
+  libs:
+    Type: AWS::Serverless::LayerVersion
+    Properties:
+      LayerName: proj-call-lib
+      Description: Dependencies for the blank-python sample app.
+      ContentUri: package/.
+      CompatibleRuntimes:
+        - python3.8
+
+
+
+# aws cloudformation deploy --template-file out.yml --stack-name blank-python --capabilities CAPABILITY_NAMED_IAM

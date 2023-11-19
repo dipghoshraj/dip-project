@@ -2,9 +2,6 @@
 service: proj-call
 frameworkVersion: '3'
 
-plugins:
-  - serverless-python-requirements  # Add this line
-
 provider:
   name: aws
   runtime: python3.8
@@ -14,10 +11,9 @@ provider:
 functions:
   app:
     handler: wsgi.handler
+    layers:
+      - arn:aws:lambda:ap-south-1:070824542205:layer:proj-call-lib:1
     events:
       - http: ANY /
       - http: 'ANY {proxy+}'
 
-custom:
-  pythonRequirements:
-    dockerizePip: true  # Dockerize the deployment process to ensure compatibility with Lambda
