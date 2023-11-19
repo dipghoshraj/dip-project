@@ -45,6 +45,7 @@ Open your web browser and navigate to http://localhost:5000 to access the Flask 
 - wsgi.py: WSGI handler for Gunicorn.
 - handler: has the main controllers for the projects
 - model: holds the db model for the project
+- test cases for both apis are inboundtest.py and outbountest.py
 - setup a .env file with in the project directory with required informations
 
 
