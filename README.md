@@ -10,6 +10,7 @@ This project demonstrates how to containerize a Flask application using Gunicorn
   - [Run Docker Container](#run-docker-container)
 - [Accessing the Application](#accessing-the-application)
 - [Project Structure](#project-structure)
+- [Configuration](#configuration)
 - [Customization](#customization)
 - [License](#license)
 
@@ -46,6 +47,18 @@ Open your web browser and navigate to http://localhost:5000 to access the Flask 
 - model: holds the db model for the project
 - setup a .env file with in the project directory with required informations
 
+
+### Configuration
+Create a .env file in the project root with the following content, and update the values with your actual database details
+```bash
+DB_USERNAME='xxxx'
+DB_PASSWORD='xxxx'
+DB_NAME='xxxx'
+DB_HOST='xx.xx.x.xx'
+DB_PORT='xxxx'
+REDIS_HOST = 'xx.xx.xx.xx'
+REDIS_PORT = 6379
+```
 
 ### Customization
 - Modify app.py, model and handler to customize your Flask application.
