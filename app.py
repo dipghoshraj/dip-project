@@ -1,10 +1,11 @@
-from flask import Flask, request, jsonify
-from flask_restful import Api, Resource
+from flask import Flask, jsonify
+from flask_restful import Api
 from dotenv import load_dotenv
 import os
 from model import db
 from handler.inbound import inbound_ops
-from handler.authenticate import validdec
+from handler.authenticate import validdec, api_call_limit
+from handler.outbound import outbound_ops
 
 
 load_dotenv()
@@ -26,12 +27,18 @@ def inbound(data):
     except Exception as e:
         return jsonify({'message': '', 'error': 'unknown faliure'}), 500
 
+
+
+
 @app.route('/api/outbound', methods=['POST'])
+@api_call_limit
 @validdec
 def outbound(data):
     try:
-        return jsonify({'message': '', 'error': 'unknown faliur'}), 200
+        outbound_resp, code = outbound_ops(data)
+        return jsonify(outbound_resp), code
     except Exception as e:
+        print(e)
         return jsonify({'message': '', 'error': 'unknown faliure'}), 500
     
 

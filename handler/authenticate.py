@@ -1,8 +1,9 @@
 
 
 from flask import request, jsonify
-from model import Account
+from model import Account, redis_object
 from jsonschema import validate, ValidationError
+import time
 
 def authenticate_user(request):
     auth = request.authorization
@@ -26,6 +27,9 @@ SCHEMA = {
     },
     "required": ["form", "to"]
 }
+
+RATE_LIMIT = 50 
+RATE_LIMIT_WINDOW = 24*3600  
 
 
 
@@ -56,3 +60,30 @@ def validdec(func):
             return jsonify({'message': '', 'error': 'unknown error'}), 500
     wrapper.__name__ = func.__name__
     return wrapper
+
+
+def api_call_limit(func):
+
+    def check_limit(*args, **kwargs):
+        try:
+            data = request.get_json()
+            text, to, form = data.get('text', ''), data.get('to', None), data.get('form', None)
+
+            key = f"user:{form}"
+            current_time = time.time()
+            cutoff_time = current_time - RATE_LIMIT_WINDOW
+
+            redis_object.zremrangebyscore(key, '-inf', cutoff_time)
+
+            # Count the number of recent requests
+            recent_requests = redis_object.zcount(key, cutoff_time, '+inf')
+
+            print(recent_requests)
+            if recent_requests < RATE_LIMIT:
+                redis_object.zadd(key, {current_time: current_time})
+                return func(*args, **kwargs)
+            return {"message": "", "error": f"limit reached for from {form}"}
+
+        except Exception as e:
+            return jsonify({'message': '', 'error': 'unknown error'}), 500
+    return check_limit

@@ -1,8 +1,4 @@
-from model import Account
-from flask import request, jsonify
-from jsonschema import validate, ValidationError
 from model import redis_object, Phone_number
-from handler import authenticate_user
 
 
 
