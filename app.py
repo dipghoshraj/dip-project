@@ -13,3 +13,4 @@ app.config['SQLALCHEMY_DATABASE_URI'] = (f"postgresql://{os.getenv('DB_USERNAME'
 db = SQLAlchemy(app)
 api = Api(app)
 
+
