@@ -9,7 +9,6 @@ This project demonstrates how to containerize a Flask application using Gunicorn
   - [Build Docker Image](#build-docker-image)
   - [Run Docker Container](#run-docker-container)
 - [Accessing the Application](#accessing-the-application)
-- [Project Structure](#project-structure)
 - [Configuration](#configuration)
 - [Customization](#customization)
 - [License](#license)
@@ -33,38 +32,28 @@ Before you begin, ensure you have the following installed:
 
 2. Run the Docker container:
     ```bash 
-    docker-compose up --build
+    docker build -t proj-call .
+    docker run -p 3000:3000 proj-call
+    
 
 ### Accessing the Application
-Open your web browser and navigate to http://localhost:5000 to access the Flask application.
-
-### Project Structure
-- Dockerfile: Specifies the Docker container configuration.
-- requirements.txt: Lists the Python dependencies for the Flask application.
-- app.py: The main entry point for the Flask application.
-- wsgi.py: WSGI handler for Gunicorn.
-- handler: has the main controllers for the projects
-- model: holds the db model for the project
-- test cases for both apis are inboundtest.py and outbountest.py
-- setup a .env file with in the project directory with required informations
+Open your web browser and navigate to http://localhost:3000 to access the rails application.
 
 
 ### Configuration
 Create a .env file in the project root with the following content, and update the values with your actual database details
 ```bash
-DB_USERNAME='xxxx'
-DB_PASSWORD='xxxx'
-DB_NAME='xxxx'
-DB_HOST='xx.xx.x.xx'
-DB_PORT='xxxx'
-REDIS_HOST = 'xx.xx.xx.xx'
-REDIS_PORT = 6379
+DB_URL=xxxx
+DB_USERNAME=xxxx
+DB_PASSWORD=xxxx
+REDIS_URL=xxxx
+DB_NAME=xxx
 ```
 
 ### Customization
-- Modify app.py, model and handler to customize your Flask application.
+- Modify model and controller to customize your rails application.
 - Adjust the Dockerfile if additional dependencies or configuration are needed.
-- Update the requirements.txt file with your specific Python package requirements.
+- Update the gemfile with your specific gems requirements.
 
 
 ### License

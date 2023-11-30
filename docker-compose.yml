@@ -1,8 +1,0 @@
-version: '3'
-
-services:
-  my_microservice:
-    build: .
-    command: gunicorn -b 0.0.0.0:5000 -w 4 wsgi:app
-    ports:
-      - "5000:5000"
