@@ -37,6 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'social_network_app',
+    'rest_framework',
+    'rest_framework.authtoken'
+
 ]
 
 MIDDLEWARE = [
@@ -75,10 +79,21 @@ WSGI_APPLICATION = 'social_network_project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'socialnetwork',
+        'USER': 'pandatoto',
+        'PASSWORD': 'u4P0cqvXnLZqsmOZgR1s',
+        'HOST': 'database-1.cjism6my0w9w.ap-south-1.rds.amazonaws.com',
+        'PORT': '3306',
     }
 }
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
+
 
 
 # Password validation

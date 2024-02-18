@@ -20,3 +20,24 @@ from django.urls import path
 urlpatterns = [
     path('admin/', admin.site.urls),
 ]
+
+
+from django.urls import path
+from social_network_app.views import *
+
+# urlpatterns = [
+#     path('users/search/', UserSearchAPIView.as_view(), name='user_search'),
+#     path('friend-request/send/', SendFriendRequestAPIView.as_view(), name='send_friend_request'),
+#     path('friend-request/accept-reject/<int:pk>/', AcceptRejectFriendRequestAPIView.as_view(), name='accept_reject_friend_request'),
+#     path('friends/', FriendListAPIView.as_view(), name='friend_list'),
+#     path('friend-request/pending/', PendingFriendRequestsAPIView.as_view(), name='pending_friend_requests'),
+# ]
+
+
+urlpatterns = [
+    path('signup/', UserSignup.as_view(), name='signup'),
+    path('login/', UserLogin.as_view(), name='login'),
+    # Include other API endpoints here for authenticated users
+]
+
+
