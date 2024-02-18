@@ -37,7 +37,13 @@ from social_network_app.views import *
 urlpatterns = [
     path('signup/', UserSignup.as_view(), name='signup'),
     path('login/', UserLogin.as_view(), name='login'),
-    # Include other API endpoints here for authenticated users
+    path('users/search/', UserSearchAPIView.as_view(), name='user-search'),
+    path('friend-requests/', SendFriendRequestAPIView.as_view(), name='friend-request-create'),
+    path('friend-requests/<int:pk>/', AcceptFriendRequestAPIView.as_view(), name='friend-request-accept-reject'),
+    path('friends/', ListFriendsAPIView.as_view(), name='friend-list'),
+    path('pending-friend-requests/', ListPendingFriendRequestsAPIView.as_view(), name='pending-friend-requests-list'),
+    path('reject-friend-requests/<int:pk>/', RejectFriendRequestAPIView.as_view(), name='pending-friend-requests-list'),
 ]
+
 
 
